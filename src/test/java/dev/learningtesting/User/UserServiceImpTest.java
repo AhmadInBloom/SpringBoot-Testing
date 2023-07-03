@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -44,6 +45,21 @@ class UserServiceImpTest {
 
     @Test
     void canAddUser() {
+        //given
+        User user = new User("Ahmad",
+                "password",
+                "USER");
+
+        // when we use:
+        userServiceImp.addUser( user );
+
+        //we should have
+        
+        ArgumentCaptor<User> captor = ArgumentCaptor.forClass( User.class);
+
+
+        verify( userRepository).save( captor.capture());
+        assertThat( captor.getValue() ).isEqualTo( user );
     }
 
     @Test
