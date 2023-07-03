@@ -4,31 +4,34 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 
-
+@ExtendWith( MockitoExtension.class)
 class UserServiceImpTest {
 
     @Mock
     UserRepository userRepository;
-   AutoCloseable autoCloseable;
+
+   @InjectMocks
     UserServiceImp userServiceImp;
 
     @BeforeEach
     void setUp() {
-        autoCloseable = MockitoAnnotations.openMocks( this );
         userServiceImp = new UserServiceImp( userRepository );
     }
 
-    @AfterEach
-    void tearDown() throws Exception {
-autoCloseable.close();
-    }
+//
+//    @AfterEach
+//    void tearDown() throws Exception {
+//    }
 
     @Test
     void getAllUsers() {
@@ -40,8 +43,7 @@ autoCloseable.close();
     }
 
     @Test
-    @Disabled
-    void addUser() {
+    void canAddUser() {
     }
 
     @Test
